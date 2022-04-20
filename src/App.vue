@@ -100,7 +100,7 @@ export default {
   },
   async created() {
     this.loading = true;
-    const response_popden = await fetch("https://raw.githack.com/RyLaird/vue-wild-horse-and-burro-program/master/src/assets/whb_ha_pop_poly.geojson")
+    const response_popden = await fetch("https://raw.githack.com/RyLaird/targets-ranked-seattle-tacoma-bellevue/master/src/data/Seattle_pop_zipCode.json?token=GHSAT0AAAAAABTXKTYN4MQA772OJ7LFVBSCYTAQELQ")
     const data_popden = await response_popden.json();
     this.geojson_popden = data_popden;
     this.loading = false;
