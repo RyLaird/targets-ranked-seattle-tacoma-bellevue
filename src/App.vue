@@ -55,7 +55,7 @@ export default {
     return {
       map: true,
       enableTooltip: true,
-      zoom: 6,
+      zoom: 8.4,
       center: [47.60665052929262, -122.33503601679615],
       geojson_popden: null,
       url: 'https://api.mapbox.com/styles/v1/rlaird2/ckwo8jew23mns14lrzvnnxh63/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmxhaXJkMiIsImEiOiJja2JmN2x6aWIwc3VmMzVvNDl5Mzk1ejNuIn0.rrNaMaCy39_ntp7qPvp0dQ',
@@ -86,7 +86,7 @@ export default {
       }
       return (feature, layer) => {
         layer.bindPopup(
-          "<div>Name: " +
+          "<div>Population Density: " +
             feature.properties.popDensity +
           "</div>",
           { permanent: false, sticky: true }
@@ -96,7 +96,7 @@ export default {
   },
   async created() {
     this.loading = true;
-    const response_popden = await fetch("https://raw.githack.com/RyLaird/targets-ranked-seattle-tacoma-bellevue/master/src/data/Seattle_pop_zipCode.json?token=GHSAT0AAAAAABTXKTYN4MQA772OJ7LFVBSCYTAQELQ")
+    const response_popden = await fetch("https://raw.githack.com/RyLaird/targets-ranked-seattle-tacoma-bellevue/master/src/data/Seattle_pop_zipcode.geojson")
     const data_popden = await response_popden.json();
     this.geojson_popden = data_popden;
     this.loading = false;
