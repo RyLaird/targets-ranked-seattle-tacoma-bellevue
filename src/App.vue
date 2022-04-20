@@ -87,11 +87,7 @@ export default {
       return (feature, layer) => {
         layer.bindPopup(
           "<div>Name: " +
-            feature.properties.HA_NAME +
-            "</div><div>Estimated Horses: " +
-            feature.properties.EST_HORSE_POP +
-            "</div><div> Estimated Burros: " +
-            feature.properties.EST_BURRO_POP +
+            feature.properties.popDensity +
           "</div>",
           { permanent: false, sticky: true }
         );
