@@ -55,7 +55,7 @@ export default {
     return {
       map: true,
       enableTooltip: true,
-      zoom: 6,
+      zoom: 10,
       center: [47.60665052929262, -122.33503601679615],
       geojson_popden: null,
       url: 'https://api.mapbox.com/styles/v1/rlaird2/ckwo8jew23mns14lrzvnnxh63/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmxhaXJkMiIsImEiOiJja2JmN2x6aWIwc3VmMzVvNDl5Mzk1ejNuIn0.rrNaMaCy39_ntp7qPvp0dQ',
@@ -67,16 +67,17 @@ export default {
     options() {
       return {
         onEachFeature: this.onEachFeatureFunction1
-      }
+      } 
     },
     styleFunction_popden() {
-      return () => {
+      return (feature) => {
         return {
           weight: 1,
-          color: "#ECEFF1",
+          color: "white",
           opacity: 1,
-          fillColor: "#7E57C2",
-          fillOpacity: 1
+          dashArray: '3',
+          fillColor: this.getColor(feature.properties.popDensity),
+          fillOpacity: .7
         };
       };
     },
@@ -86,7 +87,7 @@ export default {
       }
       return (feature, layer) => {
         layer.bindPopup(
-          "<div>Name: " +
+          "<div>Population Density: " +
             feature.properties.popDensity +
           "</div>",
           { permanent: false, sticky: true }
@@ -104,6 +105,14 @@ export default {
   methods: {
     recenterMap() {
       this.$refs.myMap.mapObject.flyTo([39, -105], 6)
+    },
+        getColor(d) {
+      return d >  25000 ? '#810f7c' :
+      d > 12000 ? '#8856a7':
+      d > 7000 ? '#8c96c6':
+      d > 3500 ? '#9ebcda':
+      d > 1500 ? '#bfd3e6':
+      '#edf8fb';
     },
   }
 };
