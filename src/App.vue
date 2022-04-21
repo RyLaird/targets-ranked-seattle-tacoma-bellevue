@@ -41,6 +41,10 @@
 import { LMap, LTileLayer, LGeoJson, LControlScale} from "vue2-leaflet";
 import 'leaflet/dist/leaflet.css'
 
+
+
+
+
 export default {
   name: 'App',
 
@@ -51,6 +55,7 @@ export default {
     LControlScale
   },
 
+
   data() {
     return {
       map: true,
@@ -58,7 +63,7 @@ export default {
       zoom: 10,
       center: [47.60665052929262, -122.33503601679615],
       geojson_popden: null,
-      url: 'https://api.mapbox.com/styles/v1/rlaird2/ckwo8jew23mns14lrzvnnxh63/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmxhaXJkMiIsImEiOiJja2JmN2x6aWIwc3VmMzVvNDl5Mzk1ejNuIn0.rrNaMaCy39_ntp7qPvp0dQ',
+      url: 'https://api.mapbox.com/styles/v1/rlaird2/cl29hg7ah000914my0rv48xwe/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmxhaXJkMiIsImEiOiJja2JmN2x6aWIwc3VmMzVvNDl5Mzk1ejNuIn0.rrNaMaCy39_ntp7qPvp0dQ',
        attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions>CARTO</a>',
     }
@@ -72,12 +77,12 @@ export default {
     styleFunction_popden() {
       return (feature) => {
         return {
-          weight: 1,
+          weight: .5,
           color: "white",
-          opacity: 1,
+          opacity: .7,
           dashArray: '3',
           fillColor: this.getColor(feature.properties.popDensity),
-          fillOpacity: .7
+          fillOpacity: .6
         };
       };
     },
@@ -86,12 +91,25 @@ export default {
         return () => {};
       }
       return (feature, layer) => {
-        layer.bindPopup(
+        layer.bindTooltip(
           "<div>Population Density: " +
             feature.properties.popDensity +
           "</div>",
           { permanent: false, sticky: true }
-        );
+        ),
+        layer.on('mouseover', function (e){
+          e.target.setStyle({
+            weight:4,
+            dashArray: '',
+          })
+        });
+        layer.on('mouseout', function (e){
+          e.target.setStyle({
+            weight: .5,
+            dashArray: '6',
+            opacity: .7
+          })
+        });
       };
     },
   },
@@ -106,7 +124,7 @@ export default {
     recenterMap() {
       this.$refs.myMap.mapObject.flyTo([39, -105], 6)
     },
-        getColor(d) {
+    getColor(d) {
       return d >  25000 ? '#810f7c' :
       d > 12000 ? '#8856a7':
       d > 7000 ? '#8c96c6':
