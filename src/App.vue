@@ -44,9 +44,9 @@
                 :fillOpacity="circle.fillOpacity">
                 <l-tooltip
                 :options="{
-                  permanent: true}"
+                  permanent: false}"
                 >
-                 {{circle.id}}
+                  <strong>Rank: {{circle.id}}</strong> <br> Total Visits: {{circle.visits}}
                 </l-tooltip>
               </l-circle-marker>
             </l-map>
@@ -112,7 +112,7 @@ export default {
     return {
       map: true,
       enableTooltip: true,
-      zoom: 10,
+      zoom: 9,
       center: [47.60665052929262, -122.33503601679615],
       geojson_popden: null,
       // geojson_targets: null,
@@ -129,143 +129,163 @@ export default {
       // },
       circles: [ { id: '1',
           center: [47.8325549090366, -122.265984791228],
-          radius: 2036124/45000,
+          radius: 2036124/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 2036124
         },
         { id: '2',
           center: [47.2377519755425, -122.480298527615],
-          radius: 1994079/45000,
+          radius: 1994079/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1994079
         },
         { id: '3',
           center: [47.7590355176595, -122.154068022324],
-          radius: 1755491/45000,
+          radius: 1755491/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1755491
         },
         { id: '4',
           center: [47.1599769333971, -122.295223147819],
-          radius: 1548847/45000,
+          radius: 1548847/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1548847
         },
         { id: '5',
           center: [47.5417638713567, -122.050644059283],
-          radius: 1529826/45000,
+          radius: 1529826/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1529826
         },
         { id: '6',
           center: [47.1128888508873, -122.291666210924],
-          radius: 1527335/45000,
+          radius: 1527335/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1527335
         },
         { id: '7',
           center: [47.4962571449308, -122.199851723218],
-          radius: 1485331/45000,
+          radius: 1485331/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1485331
         },
         { id: '8',
           center: [47.3130694995818, -122.305231085636],
-          radius: 1469152/45000,
+          radius: 1469152/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1469152
         },
         { id: '9',
           center: [47.4551854083819, -122.258933363672],
-          radius: 1461693/45000,
+          radius: 1461693/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1461693
         },
         { id: '10',
           center: [47.6725464028309, -122.103446825318],
-          radius: 1410518/45000,
+          radius: 1410518/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1410518
         },
         { id: '11',
           center: [47.1631128985045, -122.511436143694],
-          radius: 1410272/45000,
+          radius: 1410272/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1410272
         },
         { id: '12',
           center: [47.9104543526083, -122.227315450308],
-          radius: 1370193/45000,
+          radius: 1370193/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1370193
         },
         { id: '13',
           center: [47.3660073070965, -122.203416396167],
-          radius: 1305197/45000,
+          radius: 1305197/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1305197
         },
         { id: '14',
           center: [48.1489489002533, -122.19274811851],
-          radius: 1285735/45000,
+          radius: 1285735/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1285735
         },
         { id: '15',
           center: [47.3613164771609, -122.607974698474],
-          radius: 1278391/45000,
+          radius: 1278391/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1278391
         },
         { id: '16',
           center: [47.9991060530233, -122.101281006088],
-          radius: 1252088/45000,
+          radius: 1252088/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1252088
         },
         { id: '17',
           center: [47.5737553851301, -122.173513510975],
-          radius: 1185260/45000,
+          radius: 1185260/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1185260
         },
         { id: '18',
           center: [47.1725553918957, -122.172303032396],
-          radius: 1136295/45000,
+          radius: 1136295/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1136295
         },
         { id: '19',
           center: [47.5222520295411, -122.368754872501],
-          radius: 1050824/45000,
+          radius: 1050824/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 1050824
         },
         { id: '20',
           center: [47.6086499037094, -122.338778749914],
-          radius: 997170/45000,
+          radius: 997170/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
-          fillOpacity: .6
+          fillOpacity: .6,
+          visits: 997170
         },
         ]
     }
