@@ -41,8 +41,14 @@
                 :radius="circle.radius"
                 :color="circle.color"
                 :fillColor="circle.fillColor"
-                :fillOpacity="circle.fillOpacity"
-              />
+                :fillOpacity="circle.fillOpacity">
+                <l-tooltip
+                :options="{
+                  permanent: true}"
+                >
+                 {{circle.id}}
+                </l-tooltip>
+              </l-circle-marker>
             </l-map>
           </v-card>
       </v-container>
@@ -68,7 +74,7 @@
 
 <script>
 // import Map from './components/Map';
-import { LMap, LTileLayer, LGeoJson, LControlScale, LCircleMarker} from "vue2-leaflet";
+import { LMap, LTileLayer, LGeoJson, LControlScale, LCircleMarker, LTooltip} from "vue2-leaflet";
 import 'leaflet/dist/leaflet.css'
 // import {Icon} from 'leaflet';
 import Chart from '/Users/rlaird/Documents/targets-ranked-seattle-tacoma-bellevue/src/components/Chart.vue'
@@ -96,7 +102,8 @@ export default {
     Chart,
     LGeoJson,
     LControlScale,
-    LCircleMarker
+    LCircleMarker,
+    LTooltip
   },
 
 
@@ -338,6 +345,13 @@ export default {
     //     )
     //   }
     // },
+    // markerOptions() {
+    //   return (feature) => {
+    //     feature.bindTooltip(
+    //       "<div> Hello"
+    //     )
+    //   }
+    // }
   },
   async created() {
     this.loading = true;
