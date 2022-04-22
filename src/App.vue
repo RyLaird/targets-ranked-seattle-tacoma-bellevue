@@ -10,6 +10,7 @@
     </v-app-bar>
 
     <v-main>
+      <v-row>
       <v-container>
           <v-card elevation-10>
             <l-map ref="Map"
@@ -52,6 +53,9 @@
             </l-map>
           </v-card>
       </v-container>
+      
+      <span class="dot"></span>  
+      </v-row>
       <div>
         <v-card class="mt-5 mb-8">
           <v-card-text>
@@ -415,4 +419,12 @@ export default {
   border: transparent;
   box-shadow: none;
   }
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
 </style>
