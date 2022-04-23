@@ -40,7 +40,7 @@ export default {
             height: '80%',
             series: [
                 { type: 'effectScatter',
-                name: 'Target Store Outlier',
+                name: 'Target Venue Outlier',
                 symbolSize: function (data) {
                     return (data[0]/80000);
                 },
@@ -83,7 +83,7 @@ export default {
                             [2036124, [(5293+4208)/2], "1", "18305 Alderwood Mall Pkwy, Lynnwood, WA, United States"]
                     ],
                     type: 'scatter',
-                    name: 'Target Store',
+                    name: 'Target Venue',
                     label: {
                         show: true,
                         formatter: function (param) {
@@ -102,7 +102,7 @@ export default {
                 }
             },
             legend: {
-            data: ['Target Store'],
+            data: ['Target Venue'],
             left: 'center',
   },
         }

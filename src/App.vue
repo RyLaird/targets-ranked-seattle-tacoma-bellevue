@@ -77,7 +77,9 @@
             <div class="font-weight-light">Less Visits</div>
           </div>
           <div class='my-legend'>
-            <h4 class="mt-8 mb-3">Population Density</h4>
+            <h4 class="mt-8">Population Density</h4>
+            <div class="text-value-caption font-weight-thin font-italic mb-3 ml-2"> inhabitants per sq mi
+            </div>
             <div class='legend-scale'>
               <ul class='legend-labels'>
                 <li><span style='background:#edf8fb;'></span>1-1,500</li>
