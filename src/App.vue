@@ -107,7 +107,7 @@
             <v-container>
               <v-row>
                 <v-col>
-                  <chart></chart>
+                  <scatter></scatter>
                   </v-col>
               </v-row>
             </v-container>
@@ -123,7 +123,7 @@
 import { LMap, LTileLayer, LGeoJson, LControlScale, LCircleMarker, LTooltip} from "vue2-leaflet";
 import 'leaflet/dist/leaflet.css'
 // import {Icon} from 'leaflet';
-import Chart from '/Users/rlaird/Documents/targets-ranked-seattle-tacoma-bellevue/src/components/Chart.vue'
+import Scatter from "/Users/rlaird/Documents/targets-ranked-seattle-tacoma-bellevue/src/components/Scatter.vue"
 
 
 // const iconSize = [60,60]
@@ -145,7 +145,7 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    Chart,
+    Scatter,
     LGeoJson,
     LControlScale,
     LCircleMarker,
