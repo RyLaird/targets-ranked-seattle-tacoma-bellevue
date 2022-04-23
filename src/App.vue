@@ -6,9 +6,12 @@
       dark
       height="50px"
       style='z-index:2001'
+      class="text-center"
     >
-      <v-spacer></v-spacer>
-
+    <v-spacer></v-spacer>
+    <v-toolbar-title class="text-">    Ranked Target Venues in Seattle-Tacoma-Bellevue, WA Metro Area
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
     </v-app-bar>
     <v-main>
       <v-row>
@@ -25,6 +28,10 @@
                 <l-tile-layer
                   :url="url"
                   :attribution="attribution"
+                />
+                <l-tile-layer
+                  :url="urllabel"
+                  :zIndex= 1100
                 />
                 <l-control-scale position="topright" :imperial="true" :metric="false"></l-control-scale>
                 <!-- pop density geojson -->
@@ -50,7 +57,7 @@
                   :options="{
                     permanent: false}"
                   >
-                    <strong>Rank: {{circle.id}}</strong> <br> Total Visits: {{circle.visits}}
+                    <h3>Rank: {{circle.id}}</h3><br> <strong> Visits: </strong>{{circle.visits}} <br><strong>Address: </strong>{{circle.address}}
                   </l-tooltip>
                 </l-circle-marker>
               </l-map>
@@ -59,8 +66,18 @@
        </v-col>
       <v-col class="mx-auto">
         <v-card class="pa-5 mt-10 mr-5">
+          <h4 class="mb-3">Ranked Venues</h4>
+          <div>
+            <div class="font-weight-light mx-auto"> More Visits</div>
+            <!-- <v-spacer></v-spacer> -->
+            <!-- <div class="vl ml-14 mb-5 mt-5"></div> -->
+            <div class="text-center dot2 ml-6">
+              <div class="text-center dot1 mt-10"></div>
+            </div>
+            <div class="font-weight-light">Less Visits</div>
+          </div>
           <div class='my-legend'>
-            <div class='legend-title'>Population Density</div>
+            <h4 class="mt-8 mb-3">Population Density</h4>
             <div class='legend-scale'>
               <ul class='legend-labels'>
                 <li><span style='background:#edf8fb;'></span>1-1,500</li>
@@ -71,22 +88,15 @@
                 <li><span style='background:#810f7c;'></span>>25,000</li>
               </ul>
             </div>
-            <div class='legend-source'>Source: <a href="#link to source">Name of source</a></div>   
+            <div class='legend-source'>Source: <a href="https://www.census.gov/programs-surveys/acs/data.html">American Community Survey, 2019</a></div>   
           </div>    
-          <!-- <div class="text-center dot1 mt-10"></div>
-          <div class="mx-auto"> Less Visits</div>
-          <v-spacer></v-spacer>
-          <div class="vl ml-14 mb-5 mt-5"></div>
-          <div class="text-center dot2 ml-6"></div>
-          <div>More Visits</div> -->
         </v-card>
-        <!-- <v-spacer></v-spacer>
-      <div class="text-center dot1 mx-auto"></div>
-      <div class="mx-auto"> Less Visits</div>
-      <v-spacer></v-spacer>
-      <div class="vl ml-14 mb-5 mt-5"></div>
-      <div class="text-center dot2 ml-6"></div>
-      <div>More Visits</div> -->
+        <v-row class="mt-10">
+          <v-btn @click="recenterMap()" class=" ml-12 v-step-5">
+            <span class="mdi mdi-home" />
+            Reset View
+          </v-btn>  
+        </v-row>
       </v-col>
       </v-row>
       <div>
@@ -95,9 +105,6 @@
             <v-container>
               <v-row>
                 <v-col>
-                <h1 class='text-center mb-5'>
-                  Annual Target Foot Traffic (2021)
-                  </h1>
                   <chart></chart>
                   </v-col>
               </v-row>
@@ -155,8 +162,8 @@ export default {
       // geojson_targets: null,
       url: 'https://api.mapbox.com/styles/v1/rlaird2/cl29hg7ah000914my0rv48xwe/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmxhaXJkMiIsImEiOiJja2JmN2x6aWIwc3VmMzVvNDl5Mzk1ejNuIn0.rrNaMaCy39_ntp7qPvp0dQ',
       attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions>CARTO</a>',
-
+      '<a href="https://www.mapbox.com/about/maps/">© Mapbox | </a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      urllabel: 'https://api.mapbox.com/styles/v1/rlaird2/cl2c2kwij000916sa8tqf7vt4/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicmxhaXJkMiIsImEiOiJja2JmN2x6aWIwc3VmMzVvNDl5Mzk1ejNuIn0.rrNaMaCy39_ntp7qPvp0dQ',
       // circle1: {
       //   center: [47.8325549090366, -122.265984791228],
       //   radius: 30,
@@ -164,13 +171,15 @@ export default {
       //   fillColor: '#CC0100',
       //   fillOpacity: .6
       // },
+      zIndex: 650,
       circles: [ { id: '1',
           center: [47.8325549090366, -122.265984791228],
           radius: 2036124/50000,
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 2036124
+          visits: 2036124,
+          address: "18305 Alderwood Mall Pkwy, Lynnwood, WA, United States"
         },
         { id: '2',
           center: [47.2377519755425, -122.480298527615],
@@ -178,7 +187,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1994079
+          visits: 1994079,
+          address: "3320 S 23rd St, Tacoma, WA, United States"
         },
         { id: '3',
           center: [47.7590355176595, -122.154068022324],
@@ -186,7 +196,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1755491
+          visits: 1755491,
+          address: "13950 NE 178th Pl, Woodinville, WA, United States"
         },
         { id: '4',
           center: [47.1599769333971, -122.295223147819],
@@ -194,7 +205,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1548847
+          visits: 1548847,
+          address: "3310 S Meridian, Puyallup, WA, United States"
         },
         { id: '5',
           center: [47.5417638713567, -122.050644059283],
@@ -202,7 +214,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1529826
+          visits: 1529826,
+          address: "755 NW Gilman Blvd, Issaquah, WA, United States"
         },
         { id: '6',
           center: [47.1128888508873, -122.291666210924],
@@ -210,7 +223,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1527335
+          visits: 1527335,
+          address: "10302 156th St E, Puyallup, WA, United States"
         },
         { id: '7',
           center: [47.4962571449308, -122.199851723218],
@@ -218,7 +232,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1485331
+          visits: 1485331,
+          address: "1215 N Landing Way, Renton, WA, United States"
         },
         { id: '8',
           center: [47.3130694995818, -122.305231085636],
@@ -226,7 +241,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1469152
+          visits: 1469152,
+          address: "2201 S Commons, Federal Way, WA, United States"
         },
         { id: '9',
           center: [47.4551854083819, -122.258933363672],
@@ -234,7 +250,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1461693
+          visits: 1461693,
+          address: "301 Strander Blvd, Tukwila, WA, United States"
         },
         { id: '10',
           center: [47.6725464028309, -122.103446825318],
@@ -242,7 +259,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1410518
+          visits: 1410518,
+          address: "17700 NE 76th St, Redmond, WA, United States"
         },
         { id: '11',
           center: [47.1631128985045, -122.511436143694],
@@ -250,7 +268,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1410272
+          visits: 1410272,
+          address: "5618 Lakewood Town Center Blvd SW, Lakewood, WA, United States"
         },
         { id: '12',
           center: [47.9104543526083, -122.227315450308],
@@ -258,7 +277,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1370193
+          visits: 1370193,
+          address: "405 SE Everett Mall Way, Everett, WA, United States"
         },
         { id: '13',
           center: [47.3660073070965, -122.203416396167],
@@ -266,7 +286,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1305197
+          visits: 1305197,
+          address: "26301 104th Ave SE, Kent, WA, United States"
         },
         { id: '14',
           center: [48.1489489002533, -122.19274811851],
@@ -274,7 +295,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1285735
+          visits: 1285735,
+          address: "16818 Twin Lakes Ave, Marysville, WA, United States"
         },
         { id: '15',
           center: [47.3613164771609, -122.607974698474],
@@ -282,7 +304,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1278391
+          visits: 1278391,
+          address: "11400 51st Ave NW, Gig Harbor, WA, United States"
         },
         { id: '16',
           center: [47.9991060530233, -122.101281006088],
@@ -290,7 +313,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1252088
+          visits: 1252088,
+          address: "9601 Market Pl, Lake Stevens, WA, United States"
         },
         { id: '17',
           center: [47.5737553851301, -122.173513510975],
@@ -298,7 +322,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1185260
+          visits: 1185260,
+          address: "4053 Factoria Square Mall SE, Bellevue, WA, United States"
         },
         { id: '18',
           center: [47.1725553918957, -122.172303032396],
@@ -306,7 +331,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1136295
+          visits: 1136295,
+          address: "9400 192nd Ave E, Bonney Lake, WA, United States"
         },
         { id: '19',
           center: [47.5222520295411, -122.368754872501],
@@ -314,7 +340,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 1050824
+          visits: 1050824,
+          address: "2800 SW Barton St, Seattle, WA, United States"
         },
         { id: '20',
           center: [47.6086499037094, -122.338778749914],
@@ -322,7 +349,8 @@ export default {
           color: '#CC0100',
           fillColor: '#CC0100',
           fillOpacity: .6,
-          visits: 997170
+          visits: 997170,
+          address: "1401 2nd Ave, Seattle, WA, United States"
         },
         ]
     }
@@ -425,7 +453,7 @@ export default {
   },
   methods: {
     recenterMap() {
-      this.$refs.Map.mapObject.flyTo([39, -105], 6)
+      this.$refs.Map.mapObject.flyTo([47.60665052929262,-122.33503601679615],9)
     },
     zoomToFeature(e) {
       this.$refs.Map.mapObject.fitBounds(e.target.getBounds())
@@ -454,18 +482,20 @@ export default {
   }
 
 .dot1 {
-  height: 25px;
-  width: 25px;
+  position: relative;
+  height: 50px;
+  width: 50px;
   border: 2px solid #CC0100;
   fill-opacity: .6;
   filter: alpha(opacity=100);
   background-color: rgb(220, 164, 164);
   border-radius: 50%;
   display: inline-block;
+  margin-bottom: -80px;
 }
 .dot2 {
-  height: 75px;
-  width: 75px;
+  height: 100px;
+  width: 100px;
   border: 2px solid #CC0100;
   fill-opacity: .6;
   filter: alpha(opacity=100);
