@@ -123,7 +123,7 @@
 import { LMap, LTileLayer, LGeoJson, LControlScale, LCircleMarker, LTooltip} from "vue2-leaflet";
 import 'leaflet/dist/leaflet.css'
 // import {Icon} from 'leaflet';
-import Scatter from "/Users/rlaird/Documents/targets-ranked-seattle-tacoma-bellevue/src/components/Scatter.vue"
+import Scatter from "./components/Scatter.vue"
 
 
 // const iconSize = [60,60]
