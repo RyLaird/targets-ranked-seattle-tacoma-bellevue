@@ -4,57 +4,90 @@
       app
       color="#CC0100"
       dark
+      height="50px"
+      style='z-index:2001'
     >
       <v-spacer></v-spacer>
 
     </v-app-bar>
-
     <v-main>
       <v-row>
-      <v-container>
-          <v-card elevation-10>
-            <l-map ref="Map"
-              :zoom="zoom"
-              :center="center"
-              style="height: 720px"
-            >
-              <!-- sourcing -->
-              <l-tile-layer
-                :url="url"
-                :attribution="attribution"
-              />
-              <l-control-scale position="topright" :imperial="true" :metric="false"></l-control-scale>
-              <!-- pop density geojson -->
-              <l-geo-json
-                :geojson="geojson_popden"
-                :options="options"
-                :options-style="styleFunction_popden"
-                @click="zoomToFeature()"
-              />
-              <!-- <l-geo-json
-                :geojson="geojson_targets"
-                :options="markerOptions"
-                :options-style="styleFunction_marker"
-              /> -->
-              <l-circle-marker v-for="circle in circles"
-                :key="circle.id"
-                :lat-lng="circle.center"
-                :radius="circle.radius"
-                :color="circle.color"
-                :fillColor="circle.fillColor"
-                :fillOpacity="circle.fillOpacity">
-                <l-tooltip
-                :options="{
-                  permanent: false}"
-                >
-                  <strong>Rank: {{circle.id}}</strong> <br> Total Visits: {{circle.visits}}
-                </l-tooltip>
-              </l-circle-marker>
-            </l-map>
-          </v-card>
-      </v-container>
-      
-      <span class="dot"></span>  
+       <!-- <v-col></v-col> -->
+       <v-col cols="12" md="10">
+        <v-container class="mt-7">
+            <v-card elevation-10>
+              <l-map ref="Map"
+                :zoom="zoom"
+                :center="center"
+                style="height: 720px"
+              >
+                <!-- sourcing -->
+                <l-tile-layer
+                  :url="url"
+                  :attribution="attribution"
+                />
+                <l-control-scale position="topright" :imperial="true" :metric="false"></l-control-scale>
+                <!-- pop density geojson -->
+                <l-geo-json
+                  :geojson="geojson_popden"
+                  :options="options"
+                  :options-style="styleFunction_popden"
+                  @click="zoomToFeature()"
+                />
+                <!-- <l-geo-json
+                  :geojson="geojson_targets"
+                  :options="markerOptions"
+                  :options-style="styleFunction_marker"
+                /> -->
+                <l-circle-marker v-for="circle in circles"
+                  :key="circle.id"
+                  :lat-lng="circle.center"
+                  :radius="circle.radius"
+                  :color="circle.color"
+                  :fillColor="circle.fillColor"
+                  :fillOpacity="circle.fillOpacity">
+                  <l-tooltip
+                  :options="{
+                    permanent: false}"
+                  >
+                    <strong>Rank: {{circle.id}}</strong> <br> Total Visits: {{circle.visits}}
+                  </l-tooltip>
+                </l-circle-marker>
+              </l-map>
+            </v-card>
+        </v-container>
+       </v-col>
+      <v-col class="mx-auto">
+        <v-card class="pa-5 mt-10 mr-5">
+          <div class='my-legend'>
+            <div class='legend-title'>Population Density</div>
+            <div class='legend-scale'>
+              <ul class='legend-labels'>
+                <li><span style='background:#edf8fb;'></span>1-1,500</li>
+                <li><span style='background:#bfd3e6;'></span>1,501-3,500</li>
+                <li><span style='background:#9ebcda;'></span>3,501-7,000</li>
+                <li><span style='background:#8c96c6;'></span>7,0001-12,000</li>
+                <li><span style='background:#8856a7;'></span>12,001-25,000</li>
+                <li><span style='background:#810f7c;'></span>>25,000</li>
+              </ul>
+            </div>
+            <div class='legend-source'>Source: <a href="#link to source">Name of source</a></div>   
+          </div>    
+          <!-- <div class="text-center dot1 mt-10"></div>
+          <div class="mx-auto"> Less Visits</div>
+          <v-spacer></v-spacer>
+          <div class="vl ml-14 mb-5 mt-5"></div>
+          <div class="text-center dot2 ml-6"></div>
+          <div>More Visits</div> -->
+        </v-card>
+        <!-- <v-spacer></v-spacer>
+      <div class="text-center dot1 mx-auto"></div>
+      <div class="mx-auto"> Less Visits</div>
+      <v-spacer></v-spacer>
+      <div class="vl ml-14 mb-5 mt-5"></div>
+      <div class="text-center dot2 ml-6"></div>
+      <div>More Visits</div> -->
+      </v-col>
       </v-row>
       <div>
         <v-card class="mt-5 mb-8">
@@ -310,7 +343,7 @@ export default {
         return {
           weight: 1,
           color: "white",
-          opacity: .5,
+          opacity: .7,
           dashArray: '',
           fillColor: this.getColor(feature.properties.popDensity),
           fillOpacity: .4
@@ -346,7 +379,7 @@ export default {
           e.target.setStyle({
             weight: 1,
             color: "white",
-            opacity: .5
+            opacity: .7
           })
         });
       };
@@ -420,11 +453,65 @@ export default {
   box-shadow: none;
   }
 
-.dot {
+.dot1 {
   height: 25px;
   width: 25px;
-  background-color: #bbb;
+  border: 2px solid #CC0100;
+  fill-opacity: .6;
+  filter: alpha(opacity=100);
+  background-color: rgb(220, 164, 164);
   border-radius: 50%;
   display: inline-block;
 }
+.dot2 {
+  height: 75px;
+  width: 75px;
+  border: 2px solid #CC0100;
+  fill-opacity: .6;
+  filter: alpha(opacity=100);
+  background-color: rgb(220, 164, 164);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.vl {
+  border-left: 6px solid rgba(91, 89, 89, 0.741);
+  height: 200px;
+}
+
+  .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .my-legend .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 150px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 75%;
+    list-style: none;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 20px;
+    width: 50px;
+    }
+  .my-legend .legend-source {
+    font-size: 60%;
+    color: #999;
+    clear: both;
+    }
+  .my-legend a {
+    color: #777;
+    }
 </style>
