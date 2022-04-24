@@ -9,7 +9,7 @@
       class="text-center"
     >
     <v-spacer></v-spacer>
-    <v-toolbar-title class="text-">    Ranked Target Venues in Seattle-Tacoma-Bellevue, WA Metro Area
+    <v-toolbar-title class="text-">    Ranked Target Venues in Seattle-Tacoma-Bellevue, WA Metro Area (2021)
     </v-toolbar-title>
     <v-spacer></v-spacer>
     </v-app-bar>
