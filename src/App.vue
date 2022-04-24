@@ -9,7 +9,7 @@
       class="text-center"
     >
     <v-spacer></v-spacer>
-    <v-toolbar-title class="text-">    Ranked Target Venues in Seattle-Tacoma-Bellevue, WA Metro Area (2021)
+    <v-toolbar-title class="text-">    Target Venues Ranked by Visitors in Seattle-Tacoma-Bellevue, WA Metro Area (2021)
     </v-toolbar-title>
     <v-spacer></v-spacer>
     </v-app-bar>
@@ -94,7 +94,7 @@
           </div>    
         </v-card>
         <v-row class="mt-10">
-          <v-btn @click="recenterMap()" class=" ml-12 v-step-5">
+          <v-btn @click="recenterMap()" class="ml-12">
             <span class="mdi mdi-home" />
             Reset View
           </v-btn>  
@@ -394,8 +394,8 @@ export default {
       return (feature, layer) => {
         layer.bindPopup(
           "<div>Population Density: " +
-            Math.round(feature.properties.popDensity) +
-          "</div>",
+            Math.round(feature.properties.popDensity).toLocaleString() +
+          "<small><i> ppl per sq mi</i></small></div>",
           { permanent: false, sticky: true }
         ),
         layer.on('mouseover', function (e){
@@ -477,11 +477,11 @@ export default {
 </script>
 
 <style scoped>
-.leaflet-tooltip {
+/* .leaflet-tooltip {
   background-color: transparent;
   border: transparent;
   box-shadow: none;
-  }
+  } */
 
 .dot1 {
   position: relative;
