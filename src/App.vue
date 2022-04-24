@@ -78,7 +78,7 @@
           </div>
           <div class='my-legend'>
             <h4 class="mt-8">Population Density</h4>
-            <div class="text-value-caption font-weight-thin font-italic mb-3 ml-2"> inhabitants per sq mi
+            <div class="text-value-caption font-weight-thin font-italic mb-3 ml-2"> inhabitants per sq mi in zip code
             </div>
             <div class='legend-scale'>
               <ul class='legend-labels'>
@@ -393,9 +393,9 @@ export default {
       }
       return (feature, layer) => {
         layer.bindPopup(
-          "<div>Population Density: " +
+          "<div><strong>Population Density: </strong>" +
             Math.round(feature.properties.popDensity).toLocaleString() +
-          "<small><i> ppl per sq mi</i></small></div>",
+          "<small><i> ppl per sq mi</i></small></div>" + "<br><div><strong>Zip Code: </strong>" + feature.properties.Zip_code,
           { permanent: false, sticky: true }
         ),
         layer.on('mouseover', function (e){
