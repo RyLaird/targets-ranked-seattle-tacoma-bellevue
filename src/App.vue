@@ -107,7 +107,7 @@
             <v-container>
               <v-row>
                 <v-col>
-                  <scatter></scatter>
+                  <scatterplot></scatterplot>
                   </v-col>
               </v-row>
             </v-container>
@@ -123,7 +123,7 @@
 import { LMap, LTileLayer, LGeoJson, LControlScale, LCircleMarker, LTooltip} from "vue2-leaflet";
 import 'leaflet/dist/leaflet.css'
 // import {Icon} from 'leaflet';
-import Scatter from "./components/Scatter.vue"
+import Scatterplot from "./components/Scatterplot.vue"
 
 
 // const iconSize = [60,60]
@@ -145,7 +145,7 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    Scatter,
+    Scatterplot,
     LGeoJson,
     LControlScale,
     LCircleMarker,
